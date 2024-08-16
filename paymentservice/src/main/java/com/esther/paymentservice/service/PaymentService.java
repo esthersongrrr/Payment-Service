@@ -24,7 +24,7 @@ import java.util.UUID;
 public class PaymentService {
     private PaymentRepository paymentRepository;
 
-    GsonBuilder builder = new GsonBuilder();
+//    GsonBuilder builder = new GsonBuilder();
     private Gson gson; // Gson instance for JSON processing
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate; // could lead to uneven load distribution across partitions
@@ -43,7 +43,7 @@ public class PaymentService {
         this.gson = gson;
     }
 
-    @KafkaListener(topics = "order-created")
+    @KafkaListener(topics = "order-placed")
     public void handleOrderCreated(String json) {
         // Deserialize JSON back into OrderDto
         if (json.startsWith("\"") && json.endsWith("\"")) {
@@ -95,8 +95,6 @@ public class PaymentService {
     }
 
     public void submitPayment(PaymentDto paymentDto) throws IllegalStateException {
-        //Todo: check if amount is valid
-
         // Check if a payment with the same transactionId exists
         Payment payment = paymentRepository.findByOrderId(paymentDto.getOrderId())
                 .orElseThrow(() -> new IllegalStateException("No need to pay."));
