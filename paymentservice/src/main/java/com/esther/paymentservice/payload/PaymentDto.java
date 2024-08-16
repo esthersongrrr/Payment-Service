@@ -1,28 +1,24 @@
 package com.esther.paymentservice.payload;
 
+import com.esther.paymentservice.util.PaymentStatus;
+
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class PaymentDto {
     private Long id;
-    private String orderId;
+    private UUID orderId;
     private BigDecimal amount;
-    private String currency;
-    private String status;
-    private String transactionId;
+    private PaymentStatus status;
 
     // Constructors, Getters, and Setters
     public PaymentDto() {}
 
-    public PaymentDto(Long id, String orderId, BigDecimal amount, String currency, String status, String transactionId) {
-        this.id = id;
+    public PaymentDto(UUID orderId, BigDecimal amount, PaymentStatus status) {
         this.orderId = orderId;
         this.amount = amount;
-        this.currency = currency;
         this.status = status;
-        this.transactionId = transactionId;
     }
-
-    // Standard getters and setters
 
     public Long getId() {
         return id;
@@ -32,11 +28,11 @@ public class PaymentDto {
         this.id = id;
     }
 
-    public String getOrderId() {
+    public UUID getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(UUID orderId) {
         this.orderId = orderId;
     }
 
@@ -48,28 +44,12 @@ public class PaymentDto {
         this.amount = amount;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getStatus() {
+    public PaymentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
     }
 }
 

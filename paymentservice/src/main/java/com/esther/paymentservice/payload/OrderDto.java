@@ -3,6 +3,7 @@ package com.esther.paymentservice.payload;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 public class OrderDto {
@@ -12,14 +13,19 @@ public class OrderDto {
     private Date createdAt;
 
     private BigDecimal amount;
+    private String address;
+
+    private Map<String, Integer> items;
 
     public OrderDto() {}
 
-    public OrderDto(UUID id, String status, String details, Date createdAt, BigDecimal amount) {
+    public OrderDto(UUID id, String status, String details, Date createdAt, BigDecimal amount, String address, Map<String, Integer> items) {
         this.id = id;
         this.status = status;
         this.details = details;
         this.createdAt = createdAt;
+        this.items = items;
+        this.address = address;
     }
 
     public UUID getId() {
@@ -60,5 +66,21 @@ public class OrderDto {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Map<String, Integer> getItems() {
+        return items;
+    }
+
+    public void setItems(Map<String, Integer> items) {
+        this.items = items;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
